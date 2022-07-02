@@ -14,7 +14,7 @@
   let 
     pkgs = nixpkgs.legacyPackages.${system};
   in 
-  {
+  packages = {
     devShells.${system}.default = pkgs.mkShell {
       buildInputs = with pkgs; [ nix-linter statix nixfmt ];
     };
