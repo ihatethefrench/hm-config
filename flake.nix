@@ -10,11 +10,11 @@
 
   outputs = { nixpkgs, home-manager, flake-utils, ... }:
 
-  packages = flake-utils.lib.eachDefaultSystem(system:
+  flake-utils.lib.eachDefaultSystem(system:
   let 
     pkgs = nixpkgs.legacyPackages.${system};
   in 
-  {
+  packages = {
     devShells.${system}.default = pkgs.mkShell {
       buildInputs = with pkgs; [ nix-linter statix nixfmt ];
     };
