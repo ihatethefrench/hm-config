@@ -22,7 +22,7 @@
 
       homeConfigurations.michal = forAllSystems (system:
         home-manager.lib.homeManagerConfiguration {
-          let pkgs = nixpkgsFor.${system};
+          pkgs = nixpkgsFor.${system};
           modules = [ ./michal/shell.nix ./michal/dev.nix ./michal/base.nix ];
         });
       };
