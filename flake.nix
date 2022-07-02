@@ -30,7 +30,7 @@
             {
               home = {
                 username = "michal";
-                homeDirectory "/home/michal";
+                homeDirectory = "/home/michal";
               };
             }
           ];
