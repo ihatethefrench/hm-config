@@ -21,8 +21,9 @@
         });
 
       homeConfigurations.michal = forAllSystems (system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+        let pkgs = nixpkgsFor.${system};
+        in home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
           modules = [ 
             ./michal/shell.nix 
             ./michal/dev.nix 
