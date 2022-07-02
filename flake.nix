@@ -10,13 +10,13 @@
 
   outputs = { nixpkgs, home-manager, flake-utils, ... }:
 
-  packages = flake-utils.lib.eachDefaultSystem(system:
+  flake-utils.lib.eachDefaultSystem(system:
   {
     devShells.${system}.default = pkgs.mkShell {
       buildInputs = with pkgs; [ nix-linter statix nixfmt ];
     };
 
-    homeConfigurations.michal = home-manager.lib.homeManagerConfiguration {
+    packages.${system}.homeConfigurations.michal = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [ 
         ./michal/shell.nix 
