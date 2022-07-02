@@ -23,14 +23,7 @@
       homeConfigurations.michal = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in home-manager.lib.homeManagerConfiguration {
-          configuration = { pkgs, lib, ... }: {
-            imports = [ ./michal/shell.nix ./michal/dev.nix ./michal/base.nix ];
-            progam.home-manager.enable = true;
-          };
-          homeDirectory = "/home/michal";
-          username = "michal";
-          system = "${system}";
-          
+          modules = [ ./michal/shell.nix ./michal/dev.nix ./michal/base.nix ];
           inherit pkgs;
         });
       };
