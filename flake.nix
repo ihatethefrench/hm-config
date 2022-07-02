@@ -29,6 +29,8 @@
           };
           homeDirectory = "/home/michal";
           username = "michal";
+          
+          inherit pkgs;
         });
       };
 }
