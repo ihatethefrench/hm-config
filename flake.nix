@@ -12,7 +12,7 @@
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages { inherit system; });
+      nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages.${system} );
     in {
       devShell = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
