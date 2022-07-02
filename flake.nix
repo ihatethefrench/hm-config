@@ -19,7 +19,7 @@
       buildInputs = with pkgs; [ nix-linter statix nixfmt ];
     };
 
-    packages.${system}.homeConfigurations.michal = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.michal = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [ 
         ./michal/shell.nix 
