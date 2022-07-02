@@ -20,8 +20,8 @@
           buildInputs = with pkgs; [ nix-linter statix nixfmt ];
         });
 
-      homeConfigurations.michal = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system};
+      homeConfigurations.michal =
+        let pkgs = forAllSystems (system: nixpkgsFor.${system});
         in home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ 
@@ -35,6 +35,6 @@
               };
             }
           ];
-        });
+        };
       };
 }
