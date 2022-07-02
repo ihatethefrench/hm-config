@@ -12,7 +12,7 @@
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages.${system} );
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in {
       devShell = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
@@ -21,8 +21,9 @@
         });
 
       homeConfigurations.michal = forAllSystems (system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgsFor.${system};
+        let pkgs = nixpkgsFor.${system};
+        in home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
           modules = [ ./michal/shell.nix ./michal/dev.nix ./michal/base.nix ];
         });
       };
