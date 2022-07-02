@@ -9,20 +9,10 @@
 
   outputs = { nixpkgs, home-manager, ... }:
 
-    let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
-    in {
-      devShell = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system};
-        in pkgs.mkShell {
-          buildInputs = with pkgs; [ nix-linter statix nixfmt ];
-        });
+  {
 
-      homeConfigurations.michal = forAllSystems (system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+      homeConfigurations.michal = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           modules = [ 
             ./michal/shell.nix 
             ./michal/dev.nix 
@@ -34,6 +24,6 @@
               };
             }
           ];
-        });
+        };
       };
 }
