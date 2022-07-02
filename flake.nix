@@ -8,7 +8,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, home-manager, flake-utils ... }:
+  outputs = { nixpkgs, home-manager, flake-utils, ... }:
 
   flake-utils.lib.eachDefaultSystem(system:
   {
