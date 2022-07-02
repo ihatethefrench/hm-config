@@ -10,7 +10,7 @@
 
   outputs = { nixpkgs, home-manager, flake-utils, ... }:
 
-  flake-utils.lib.eachDefaultSystem(system:
+  packages = flake-utils.lib.eachDefaultSystem(system:
   let 
     pkgs = nixpkgs.legacyPackages.${system};
   in 
